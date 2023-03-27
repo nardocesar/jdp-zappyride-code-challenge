@@ -1,2 +1,10 @@
 export { HeaderComponent } from "./header";
 export { StepperComponent } from "./stepper";
+export {
+  PageBackground,
+  PageContent,
+  PageWrapper,
+  CustomButton,
+  Spacer,
+} from "./layout";
+export { SectionTitleComponent } from "./section-title";
