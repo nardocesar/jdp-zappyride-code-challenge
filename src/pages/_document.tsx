@@ -2,7 +2,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 import { FC } from "react";
 import { ServerStyleSheet } from "styled-components";
 
-function MyDocument(props) {
+function MyDocument() {
   return (
     <Html>
       <Head />

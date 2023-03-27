@@ -41,6 +41,9 @@ export const CustomButton = styled.button<{ variant: "primary" | "secondary" }>`
 
   text-transform: uppercase;
 
+  ${({ theme, variant }) =>
+    theme.buttons[variant].border && "border:" + theme.buttons[variant].border};
+
   font-weight: ${({ variant }) => (variant === "primary" ? 700 : 400)};
   color: ${({ theme, variant }) => theme.buttons[variant].color};
   background-color: ${({ theme, variant }) =>
@@ -49,11 +52,24 @@ export const CustomButton = styled.button<{ variant: "primary" | "secondary" }>`
   transition: all 200ms ease-out;
 
   &:hover {
-    opacity: 0.9;
+    opacity: 0.8;
   }
 `;
 
 export const Spacer = styled.div<{ height: number }>`
   display: block;
   height: ${({ height }) => height + "px"};
+`;
+
+export const IconHolder = styled.i<{ size: number; icon: string }>`
+  display: flex;
+  content: "";
+
+  background-image: url(${({ icon }) => icon});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
 `;

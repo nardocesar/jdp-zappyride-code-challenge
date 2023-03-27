@@ -16,9 +16,10 @@ export const customTheme: DefaultTheme = {
       color: "#FFFFFF",
     },
     secondary: {
-      background: "#0072CE",
+      border: "solid 1px #0072CE",
+      background: "#FFFFFF",
       fontSize: "18px",
-      color: "#FFFFFF",
+      color: "#172536",
     },
   },
 };

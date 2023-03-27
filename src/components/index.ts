@@ -6,5 +6,7 @@ export {
   PageWrapper,
   CustomButton,
   Spacer,
+  IconHolder,
 } from "./layout";
 export { SectionTitleComponent } from "./section-title";
+export { CustomInputText, SelectWithAutocomplete } from "./inputs";
