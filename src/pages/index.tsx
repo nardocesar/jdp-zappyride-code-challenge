@@ -7,6 +7,8 @@ interface HomeProps {
 }
 
 const Home = ({ data }: HomeProps) => {
+  console.log(data);
+
   return <HomeComponent />;
 };
 
