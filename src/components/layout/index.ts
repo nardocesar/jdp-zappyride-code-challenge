@@ -10,6 +10,7 @@ export const PageWrapper = styled.div`
 export const PageContent = styled.main`
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
   padding: 64px;
