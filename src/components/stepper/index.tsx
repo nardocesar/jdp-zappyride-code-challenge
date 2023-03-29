@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { NavigationType } from "types";
 import { StepperButton, StepperContainer, StepperWrapper } from "./styles";
 
@@ -16,6 +16,18 @@ export const StepperComponent: FC<StepperComponentProps> = ({ steps }) => {
     setActiveStep(active);
   };
 
+  useEffect(() => {
+    const activeRoute = steps.find((step) =>
+      router.asPath.includes(step.route)
+    );
+
+    if (activeRoute) {
+      setActiveStep(activeRoute?.order as number);
+    } else {
+      setActiveStep(0);
+    }
+  }, [router.asPath, steps]);
+
   return (
     <StepperContainer>
       <span>
@@ -25,14 +37,18 @@ export const StepperComponent: FC<StepperComponentProps> = ({ steps }) => {
         <StepperButton
           active={activeStep === 0}
           onClick={() => handleClick(0, "/")}
+          type="button"
         />
-        {steps.map((step, index) => (
-          <StepperButton
-            key={`step_button_${index}`}
-            active={activeStep === step.order}
-            onClick={() => handleClick(step.order, `/steps/${step.route}`)}
-          />
-        ))}
+        {steps
+          .sort((a, b) => a.order - b.order)
+          .map((step, index) => (
+            <StepperButton
+              key={`step_button_${index}`}
+              active={activeStep === step.order}
+              onClick={() => handleClick(step.order, `/steps/${step.route}`)}
+              type="button"
+            />
+          ))}
       </StepperWrapper>
     </StepperContainer>
   );
