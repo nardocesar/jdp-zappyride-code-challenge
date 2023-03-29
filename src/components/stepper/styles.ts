@@ -28,6 +28,7 @@ export const StepperWrapper = styled.div`
 
 export const StepperButton = styled.button<{ active: boolean }>`
   display: flex;
+  cursor: pointer;
   width: 100%;
   max-width: 80px;
   height: 4px;
