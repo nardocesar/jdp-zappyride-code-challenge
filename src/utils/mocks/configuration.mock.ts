@@ -58,5 +58,13 @@ export const pageConfigMock: PageConfigType = {
         "Apartment Building",
       ],
     },
+    {
+      order: 3,
+      title: "General Information",
+      description:
+        "We use this information to calculate fuel costs and applicable incentives",
+      fieldTitle: "Address",
+      fieldType: "text",
+    },
   ],
 };
