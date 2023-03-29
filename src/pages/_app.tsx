@@ -11,30 +11,24 @@ import {
 import "styles/globals.css";
 
 import App, { AppContext, AppInitialProps, AppProps } from "next/app";
-import { mockTheme, pageConfigMock } from "utils/mocks";
 import { useBuildTheme as buildTheme } from "providers/hooks";
 import { useEffect, useState } from "react";
 import { PageTheme } from "providers/hooks/useBuildTheme";
 import { FormikContext, PageConfigProvider } from "providers/contexts";
 import { PageConfigType } from "types";
 
-type CustomAppProps = { theme: PageTheme; config: PageConfigType };
+type CustomAppProps = { config: PageConfigType };
 
-const MyApp = ({
-  Component,
-  pageProps,
-  theme,
-  config,
-}: AppProps & CustomAppProps) => {
+const MyApp = ({ Component, pageProps, config }: AppProps & CustomAppProps) => {
   const [customTheme, setCustomTheme] = useState<Partial<PageTheme> | null>(
     null
   );
   const [customConfig, setCustomConfig] = useState<PageConfigType | null>(null);
 
   useEffect(() => {
-    setCustomTheme(buildTheme(theme));
+    setCustomTheme(buildTheme(config));
     setCustomConfig(config);
-  }, [theme, config]);
+  }, [config]);
 
   return (
     customTheme && (
@@ -69,7 +63,12 @@ MyApp.getInitialProps = async (
 ): Promise<CustomAppProps & AppInitialProps> => {
   const ctx = await App.getInitialProps(context);
 
-  return { ...ctx, theme: mockTheme, config: pageConfigMock };
+  const res = await fetch(
+    `${process.env.BASE_URL}/jdp-zappyride-code-challenge-mock`
+  );
+  const data = await res.json();
+
+  return { ...ctx, config: data };
 };
 
 export default MyApp;
