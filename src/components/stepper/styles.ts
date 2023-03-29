@@ -31,7 +31,8 @@ export const StepperButton = styled.button<{ active: boolean }>`
   width: 100%;
   max-width: 80px;
   height: 4px;
-  background-color: ${({ active }) => (active ? "#0072ce" : "#595959")};
+  background-color: ${({ active, theme }) =>
+    active ? theme.stepper.filledColor : theme.stepper.emptyColor};
 
   transition: all 200ms ease-out;
 `;
