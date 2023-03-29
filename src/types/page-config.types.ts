@@ -22,12 +22,14 @@ interface LayoutType {
   secondaryButton: ButtonType;
 }
 
-interface StepProps {
+export type FieldType = "text" | "select";
+
+export interface StepProps {
   order: number;
   title: string;
   description: string;
   fieldTitle: string;
-  fieldType: "text" | "select";
+  fieldType: FieldType;
   helperText?: string;
   options?: string[];
 }

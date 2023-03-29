@@ -15,7 +15,7 @@ import { mockTheme, pageConfigMock } from "utils/mocks";
 import { useBuildTheme as buildTheme } from "providers/hooks";
 import { useEffect, useState } from "react";
 import { PageTheme } from "providers/hooks/useBuildTheme";
-import { PageConfigProvider } from "providers/contexts";
+import { FormikContext, PageConfigProvider } from "providers/contexts";
 import { PageConfigType } from "types";
 
 type CustomAppProps = { theme: PageTheme; config: PageConfigType };
@@ -40,22 +40,24 @@ const MyApp = ({
     customTheme && (
       <ThemeProvider theme={customTheme}>
         <PageConfigProvider config={customConfig}>
-          <PageWrapper>
-            <Head>
-              <title>JD Power ZappyRide</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-              <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <HeaderComponent />
-            <PageBackground>
-              <PageContent>
-                <Component {...pageProps} />
-              </PageContent>
-            </PageBackground>
-          </PageWrapper>
+          <FormikContext>
+            <PageWrapper>
+              <Head>
+                <title>JD Power ZappyRide</title>
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1"
+                />
+                <link rel="icon" href="/favicon.ico" />
+              </Head>
+              <HeaderComponent />
+              <PageBackground>
+                <PageContent>
+                  <Component {...pageProps} />
+                </PageContent>
+              </PageBackground>
+            </PageWrapper>
+          </FormikContext>
         </PageConfigProvider>
       </ThemeProvider>
     )

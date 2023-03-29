@@ -1,4 +1,5 @@
 import { IconHolder } from "components/layout";
+import { useFormikContext } from "formik";
 import React, { useState, useEffect, useRef } from "react";
 import { CustomFieldset, SelectOptionList, SelectWrapper } from "./styles";
 
@@ -10,16 +11,20 @@ type OptionType = {
 type Props = {
   options: OptionType[];
   label: string;
-  onChange: (value: OptionType | null) => void;
+  onChange: (fieldName: string, value: string) => void;
+  fieldName: string;
 };
 
 export const SelectWithAutocomplete: React.FC<Props> = ({
   options,
   label,
   onChange,
+  fieldName,
 }) => {
-  const [value, setValue] = useState<OptionType | null>(null);
-  const [inputValue, setInputValue] = useState("");
+  const { values } = useFormikContext<any>();
+  const selectedOption =
+    options.find((option) => option.value === values[fieldName])?.label || "";
+  const [inputValue, setInputValue] = useState(selectedOption);
   const [open, setOpen] = useState(false);
   const optionsRef = useRef<HTMLDivElement>(null);
 
@@ -42,21 +47,19 @@ export const SelectWithAutocomplete: React.FC<Props> = ({
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
+
+    onChange(fieldName, newValue);
     setInputValue(newValue);
 
     if (newValue === "") {
-      setValue(null);
-      onChange(null);
+      onChange(fieldName, "");
     }
   };
 
   const handleOptionClick = (option: OptionType) => {
-    console.log(option);
-
-    setValue(option);
     setInputValue(option.label);
     setOpen(false);
-    onChange(option);
+    onChange(fieldName, option.value);
   };
 
   const handleInputFocus = () => {
@@ -74,6 +77,7 @@ export const SelectWithAutocomplete: React.FC<Props> = ({
         <input
           type="text"
           value={inputValue}
+          name={fieldName}
           onChange={handleOnChange}
           onFocus={handleInputFocus}
         />

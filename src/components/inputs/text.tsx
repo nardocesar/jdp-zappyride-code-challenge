@@ -1,9 +1,20 @@
 import { CustomFieldset } from "./styles";
+import { Field } from "formik";
 
-export const CustomInputText = () => (
+type CustomInputTextProps = {
+  label: string;
+  fieldName: string;
+  helperText?: string;
+};
+
+export const CustomInputText = ({
+  label,
+  fieldName,
+  helperText,
+}: CustomInputTextProps) => (
   <CustomFieldset>
-    <legend>Zip Code</legend>
-    <input type="text" />
-    <label>Used to check incentive applicability and fuel prices</label>
+    <legend>{label}</legend>
+    <Field type="text" name={fieldName} />
+    {helperText && <label>{helperText}</label>}
   </CustomFieldset>
 );

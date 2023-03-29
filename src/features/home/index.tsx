@@ -4,8 +4,18 @@ import { FC } from "react";
 import { IconsWrapper } from "./styles";
 
 import { OrganizationIcon, CarIcon, StatsIcon } from "assets/icons";
+import { useRouter } from "next/router";
+import { useNavigation } from "providers/hooks";
 
 export const HomeComponent: FC = () => {
+  const router = useRouter();
+  const navigation = useNavigation();
+
+  const navigateToFirstStep = () => {
+    const firstStep = navigation?.find((step) => step.order === 1);
+    router.push(`/steps/${firstStep?.route}`);
+  };
+
   return (
     <>
       <SectionTitleComponent
@@ -29,7 +39,11 @@ export const HomeComponent: FC = () => {
         </figure>
       </IconsWrapper>
 
-      <CustomButton variant="primary">
+      <CustomButton
+        variant="primary"
+        type="button"
+        onClick={navigateToFirstStep}
+      >
         Create your first vehicle set
       </CustomButton>
     </>
