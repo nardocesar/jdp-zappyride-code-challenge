@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SectionTitleContainer = styled.div`
-  max-width: 498px;
+  max-width: 530px;
   text-align: center;
 
   h1 {

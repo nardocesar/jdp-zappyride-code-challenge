@@ -1,18 +1,42 @@
-import { CustomButton, SectionTitleComponent } from "components";
+import {
+  CustomButton,
+  SectionTitleComponent,
+  CustomInputText,
+  SelectWithAutocomplete,
+} from "components";
 import { FC } from "react";
+import { ActionsWrapper } from "./styles";
+
+const options = [
+  { label: "Option 1", value: "option-1" },
+  { label: "Option 2", value: "option-2" },
+  { label: "Option 3", value: "option-3" },
+];
+
+const handleChange = (value: any) => {
+  console.log(value);
+};
 
 export const StepsComponent: FC = () => {
   return (
     <>
       <SectionTitleComponent
-        title="Going electric starts with understanding your needs"
-        description="We need to understand your requirements so we can recommend the
-        appropriate electric vehicle, charger and identify incentives."
+        title="General Information"
+        description="We use this information to calculate fuel costs and applicable incentives"
       />
 
-      <CustomButton variant="primary">
-        Create your first vehicle set
-      </CustomButton>
+      <CustomInputText />
+
+      <SelectWithAutocomplete
+        options={options}
+        label="Select an option"
+        onChange={handleChange}
+      />
+
+      <ActionsWrapper>
+        <CustomButton variant="secondary">back</CustomButton>
+        <CustomButton variant="primary">next</CustomButton>
+      </ActionsWrapper>
     </>
   );
 };
